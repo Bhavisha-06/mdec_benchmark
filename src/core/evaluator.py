@@ -1,6 +1,12 @@
 from typing import Optional, Sequence
 import sys
-sys.path.insert(0, '/kaggle/working/mdec_benchmark')
+import os
+
+# Add the repository root to Python path BEFORE any imports
+repo_root = '/kaggle/working/mdec_benchmark'
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
+
 import cv2
 import numpy as np
 import torch
@@ -10,9 +16,20 @@ from torch import Tensor
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+# Now these imports should work
 from src.tools import TableFormatter, blend_stereo, to_inv, to_scaled
 from src.typing import ArrDict, Metrics
-from .metrics import metrics_benchmark, metrics_eigen, metrics_ibims, metrics_pointcloud
+
+# For relative import, we need to import the metrics module directly
+import importlib.util
+metrics_path = os.path.join(repo_root, 'src', 'core', 'metrics.py')
+spec = importlib.util.spec_from_file_location("metrics", metrics_path)
+metrics_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(metrics_module)
+metrics_benchmark = metrics_module.metrics_benchmark
+metrics_eigen = metrics_module.metrics_eigen
+metrics_ibims = metrics_module.metrics_ibims
+metrics_pointcloud = metrics_module.metrics_pointcloud
 
 __all__ = ['predict_depths', 'MonoDepthEvaluator']
 
