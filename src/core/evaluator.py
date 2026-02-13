@@ -1,5 +1,6 @@
 from typing import Optional, Sequence
-
+import sys
+sys.path.insert(0, '/kaggle/working/mdec_benchmark')
 import cv2
 import numpy as np
 import torch
