@@ -15,7 +15,10 @@ static methods.
 import torch
 import re
 import collections
-from torch._six import string_classes
+try:
+    from torch._six import string_classes
+except ImportError:
+    string_classes = str
 
 from .timers import MultiLevelTimer, Timer
 
