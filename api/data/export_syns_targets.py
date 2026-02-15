@@ -12,6 +12,7 @@ This dataset will produce a targets file with the following variables.
 from argparse import ArgumentParser
 from pathlib import Path
 from typing import Optional
+import sys
 
 repo_root = '/kaggle/working/mdec_benchmark'
 if repo_root not in sys.path:
