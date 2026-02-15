@@ -157,7 +157,7 @@ class MonoDepthEvaluator:
         pred_mask = pred[mask]
         target_mask = target[mask]
 
-        ms = {'Ratio': r}
+        ms = {}
         if cat: ms['Cat'] = str(cat)
         if subcat: ms['SubCat'] = str(subcat)
 
