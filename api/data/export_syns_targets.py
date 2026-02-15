@@ -13,6 +13,10 @@ from argparse import ArgumentParser
 from pathlib import Path
 from typing import Optional
 
+repo_root = '/kaggle/working/mdec_benchmark'
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
+
 import numpy as np
 from tqdm import tqdm
 
